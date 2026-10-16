@@ -17,6 +17,10 @@ Script plugins are run manually from the Plugins window.
 
 ## Slicing Pipeline
 
+[Mode](option_mode): `Advanced`.  
+[Variable](built_in_placeholders_variables): `slicing_pipeline_plugin`.  
+[Type](option_type#list-types): `Text list`.  
+[CLI Example](cli_mode#setting-overrides): `--slicing-pipeline-plugin=value`.  
 Slicing-pipeline plugins run at selected points in the slicing workflow. They can inspect or modify
 the live slicing graph, or edit the exported G-code at the post-processing step. This capability is
 experimental and intended for plugin developers and testers.
@@ -37,6 +41,14 @@ appears while the plugin feature is activated and disappears when it is deactiva
 If many page plugins are activated, set how many tabs are shown side by side in **Preferences** >
 **General** > **Plugins** > **Visible plugin pages** (1 to 10, default 5). The remaining pages
 are listed in a dropdown on the last plugin tab.
+
+## Resource Textures
+
+Resource-texture plugins contribute height-map images as a resource pack. Each plugin provides one pack of images, and the pack's name is how it appears in the app.
+
+These plugins install as wheels (`.whl`) only, because a pack ships image files alongside its code.
+
+Enabling, disabling, or uninstalling a pack adds or removes its textures, and the change shows up without a restart. A project that has already used a pack texture keeps working, because it stores its own copy of the image.
 
 ## Plugin Configuration
 

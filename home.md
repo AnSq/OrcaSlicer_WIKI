@@ -34,6 +34,8 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - Basic Information
     - [<img alt="param_printable_space" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_printable_space.svg?raw=true" height="22"> Printable space](printer_basic_information_printable_space)
     - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> Advanced](printer_basic_information_advanced)
+    - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> Belt printer](printer_basic_information_belt_printer)
+    - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> Machine frame transforms](printer_basic_information_machine_frame_transforms)
     - [<img alt="param_cooling_fan" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_cooling_fan.svg?raw=true" height="22"> Cooling Fan](printer_basic_information_cooling_fan)
     - [<img alt="param_extruder_clearance" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_extruder_clearance.svg?raw=true" height="22"> Extruder Clearance](printer_basic_information_extruder_clearance)
     - [<img alt="param_adaptive_mesh" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_adaptive_mesh.svg?raw=true" height="22"> Adaptive bed mesh](printer_basic_information_adaptive_bed_mesh)
@@ -44,6 +46,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
     - [<img alt="param_tower" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_tower.svg?raw=true" height="22"> Wipe tower](printer_multimaterial_wipe_tower)
     - [<img alt="param_settings" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_settings.svg?raw=true" height="22"> Single extruder multi_material parameters](printer_multimaterial_semm_parameters)
     - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> Advanced](printer_multimaterial_advanced)
+    - [<img alt="param_advanced" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_advanced.svg?raw=true" height="22"> IDEX/IQEX Configuration](printer_multimaterial_idex_iqex)
 - Extruder
     - [<img alt="param_information" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_information.svg?raw=true" height="22"> Basic Information](printer_extruder_basic_information)
     - [<img alt="param_retraction" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_retraction.svg?raw=true" height="22"> Retraction](printer_extruder_retraction)
@@ -203,6 +206,7 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
         - [Texture Displacement](prepare_texture_displacement)
             - [UV Editor](prepare_texture_displacement_uv_editor)
             - [Pro Mode](prepare_texture_displacement_pro)
+        - [Image](prepare_image_tool)
         - [<img alt="toolbar_text_dark" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/toolbar_text_dark.svg?raw=true" height="22"> Emboss](prepare_emboss)
         - [<img alt="toolbar_brimears_dark" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/toolbar_brimears_dark.svg?raw=true" height="22"> Brim Ears Painting](prepare_brim_ears_painting)
     - [Assembly Tools](prepare_assembly_tools)
@@ -216,14 +220,14 @@ OrcaSlicer is a powerful open source slicer for FFF (FDM) 3D Printers. This wiki
 - [<img alt="param_extruder_temp" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_extruder_temp.svg?raw=true" height="22"> Temperature](temp_calib)
 - [<img alt="param_volumetric_speed" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_volumetric_speed.svg?raw=true" height="22"> Volumetric Speed](volumetric_speed_calib)
 - [<img alt="param_flow_ratio_and_pressure_advance" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_flow_ratio_and_pressure_advance.svg?raw=true" height="22"> Pressure Advance](pressure_advance_calib)
-    - [Adaptive Pressure Advance Guide](adaptive_pressure_advance_calib)
 - [<img alt="param_line_width" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_line_width.svg?raw=true" height="22"> Flow Ratio](flow_ratio_calib)
 - [<img alt="param_retraction" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_retraction.svg?raw=true" height="22"> Retraction](retraction_calib)
-- [<img alt="param_precision" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_precision.svg?raw=true" height="22"> Tolerance](tolerance_calib)
 - Advanced:
     - [<img alt="param_jerk" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_jerk.svg?raw=true" height="22"> Cornering (Jerk & Junction Deviation)](cornering_calib)
     - [<img alt="param_resonance_avoidance" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_resonance_avoidance.svg?raw=true" height="22"> Input Shaping](input_shaping_calib)
         - [VFA](vfa_calib)
+    - [<img alt="param_flow_ratio_and_pressure_advance" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_flow_ratio_and_pressure_advance.svg?raw=true" height="22"> Adaptive Pressure Advance](adaptive_pressure_advance_calib)
+- [<img alt="param_precision" src="https://github.com/OrcaSlicer/OrcaSlicer/blob/main/resources/images/param_precision.svg?raw=true" height="22"> Tolerance](tolerance_calib)
 
 ## General Settings
 
@@ -275,6 +279,8 @@ OrcaSlicer can run headless from the command line for automation, batch processi
 - How to:
     - [Use mixed with different nozzle sizes](mixed_nozzle_sizes)
     - [Calibrate Your Printer](calibration_guide)
+    - [Print on a Belt Printer](belt_printing)
+    - [Print in Parallel on an IDEX/IQEX Printer](idex_iqex_parallel_printing)
     - [Create Profiles](how_to_create_profiles)
     - [Download Pull Requests Artifacts for Testing](how_to_download_pr_artifacts)
 
@@ -282,6 +288,7 @@ OrcaSlicer can run headless from the command line for automation, batch processi
 
 See the [all releases](releases_index) overview, or jump straight to a version:
 
+- [OrcaSlicer V2.5.0 Alpha](release_2_5_0_alpha)
 - [OrcaSlicer V2.4.2](release_2_4_2)
 - [OrcaSlicer V2.4.1](release_2_4_1)
 - [OrcaSlicer V2.4.0](release_2_4_0)
@@ -298,6 +305,7 @@ See the [all releases](releases_index) overview, or jump straight to a version:
     - [Linux](how_to_build_linux)
     - [Compiler caching](compiler_caching)
 - [How to run tests](how_to_test)
+- [How to run the clang-tidy check](clang_tidy)
 - [Localization and translation guide](localization_guide)
     - [Glossary](localization_glossary)
 - [How to create profiles](how_to_create_profiles)
