@@ -274,8 +274,8 @@ Three worked examples to start from. All of them assume Standard mode.
 
 ## Limitations
 
-> [!IMPORTANT]
-> Paint, layers and their settings live with the model in memory but are **not yet stored in project files**. Bake before saving a `.3mf`, or the relief will not be there when the project is reopened. Baked geometry and baked colours are ordinary model data and save normally.
+> [!NOTE]
+> Paint, layers and their settings are **saved in the project `.3mf`**, together with each layer's texture image and the UV work (seams and island placements), so a project reopens with its relief still editable, even on a computer that doesn't have your custom textures. Older versions of OrcaSlicer still open these projects but drop the unbaked relief. Baked geometry and baked colours are ordinary model data and save normally.
 
 - **Anything that replaces the geometry drops unbaked paint** - Simplify, and Pro mode's Subdivide and Remesh. Relief that is already baked in is unaffected.
 - **Island placements are tied to the current unwrap.** Repainting or changing the seam angle re-cuts the pieces and discards placements made by hand before it.
