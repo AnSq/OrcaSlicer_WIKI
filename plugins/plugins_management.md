@@ -16,7 +16,8 @@ Right-click a local plugin to manage it.
 
 Common actions include:
 
-- **Delete/Unsubscribe** removes the plugin if it is local, unsubscribes and removes the plugin if it is from the cloud.
+- **Delete** removes a local plugin or the installed copy of a cloud plugin. Deleting a subscribed cloud plugin does not cancel the subscription.
+- **Unsubscribe** cancels a cloud plugin subscription and removes its installed copy.
 - **Show in folder** opens the plugin location on your computer.
 - **Reinstall** installs the plugin again from its source file.
 
