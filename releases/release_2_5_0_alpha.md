@@ -10,21 +10,21 @@ OrcaSlicer 2.5.0 introduces **Python plugins**, a supported way to add your own 
 
 ☁️ **Find and share plugins on [Orca Cloud](https://cloud.orcaslicer.com/app/plugins/plugin-hub).** Browse the plugins the community has published and subscribe with your Orca Cloud account. OrcaSlicer installs them, offers updates when their authors release new versions, and brings them to every computer you sign in on. Built a plugin of your own? Publish it on Orca Cloud and anyone can use it.
 
-https://github.com/user-attachments/assets/4e92d363-aa03-4b07-b876-9ae90ff593e3
+<video controls width="800" src="https://github.com/user-attachments/assets/4e92d363-aa03-4b07-b876-9ae90ff593e3"></video>
 
 * **Python plugins** by @peachismomo and @lamweilun in [14530](https://github.com/OrcaSlicer/OrcaSlicer/pull/14530), [14776](https://github.com/OrcaSlicer/OrcaSlicer/pull/14776), [16070](https://github.com/OrcaSlicer/OrcaSlicer/pull/16070), [16473](https://github.com/OrcaSlicer/OrcaSlicer/pull/16473) and [16552](https://github.com/OrcaSlicer/OrcaSlicer/pull/16552)
     OrcaSlicer now runs plugins written in Python on a Python runtime that ships with the app, so there's nothing extra to install. A plugin is either a single `.py` file or a `.whl` package, and any Python packages it depends on are installed for it automatically (on Windows ARM64 too). On Windows, plugins install correctly even when their files end up past the 260-character path limit, such as in a portable install inside a deeply nested folder. One plugin can provide several features, called capabilities. **Script** actions run when you click Run in the Plugins window or pick them in the Speed Dial. **Slicing Pipeline** steps run while you slice. **Pages** add their own tab to the main window. **Resource Texture** packs add their own height-map textures to the Texture Displacement picker.
 
     Plugins work with Orca Cloud the same way preset bundles do. Click **Browse plugins** in the Plugins window to subscribe to a plugin on Orca Cloud, and OrcaSlicer downloads it, installs it and offers updates when the author publishes a new version. Your subscriptions follow your account, so they're unloaded when you sign out and come back when you sign in again. **Install local plugin** side-loads a plugin file instead, which is handy for private plugins and development. Presets remember which plugins they use. If you open a preset or project on a computer that's missing one, a notification offers to install it from Orca Cloud (when it's published there), or to switch it on if it's only disabled. The Slice button stays disabled until the missing plugin is sorted out. [Wiki](https://www.orcaslicer.com/wiki/plugins_getting_started)
 
-    https://github.com/user-attachments/assets/abbd7900-3062-4e33-8f77-5d30d567be1d
+    <video controls width="800" src="https://github.com/user-attachments/assets/abbd7900-3062-4e33-8f77-5d30d567be1d"></video>
 
 * **Slicing-pipeline plugins** by @SoftFever in [14721](https://github.com/OrcaSlicer/OrcaSlicer/pull/14721)
     A plugin can now take part in slicing itself. Pick one or more under **Process > Others > Slicing Pipeline Plugin** (Advanced mode), and they run at set points while the model is sliced. There, a plugin can read and edit the sliced layers, and the walls, infill, preview and final G-code all follow its changes. It can also edit the exported G-code file as a final post-processing step. Plugin errors show up as ordinary slicing errors rather than crashing OrcaSlicer. The PR includes sample plugins: one twists, tapers or wobbles any model as it slices, and one applies fuzzy skin to the sliced outline itself, so the infill follows the fuzzy wall too. This is experimental and aimed at plugin developers and testers. [Wiki](https://www.orcaslicer.com/wiki/plugins_types)
 
     <img width="700" alt="Fuzzy Slices plugin selected under Slicing Pipeline Plugin, with the fuzzy-walled result in the preview" src="https://github.com/user-attachments/assets/bcf8b0c7-f932-4e6a-985d-7c9cc2f3d7cb" />
 
-    https://github.com/user-attachments/assets/d1309ea8-b01c-4708-adf1-821b3b00a4cc
+    <video controls width="800" src="https://github.com/user-attachments/assets/d1309ea8-b01c-4708-adf1-821b3b00a4cc"></video>
 
 * **Plugin settings, globally or per preset** by @peachismomo and @SoftFever in [14746](https://github.com/OrcaSlicer/OrcaSlicer/pull/14746), [14944](https://github.com/OrcaSlicer/OrcaSlicer/pull/14944) and [14862](https://github.com/OrcaSlicer/OrcaSlicer/pull/14862)
     You no longer have to edit a plugin's source to change its options. The **Config** tab in the Plugins window holds each capability's settings, shown either in a built-in JSON editor or on the plugin's own settings page. **Restore defaults** puts the plugin's defaults back. The process, filament and printer settings each have a **Plugin Configuration** group (Advanced mode). Its **Configure** button lets you override those settings for that preset only. The override is saved with the preset and works like any other setting: it shows the modified marker and revert arrow, and it travels with projects and cloud sync. Changes to a slicing plugin's settings take effect on the very next slice, and plugin settings pages follow the app's light or dark theme. Settings survive plugin updates and reinstalls. When a preset stops using a plugin, its leftover overrides are cleaned up. [Wiki](https://www.orcaslicer.com/wiki/plugins_types)
@@ -38,7 +38,7 @@ https://github.com/user-attachments/assets/4e92d363-aa03-4b07-b876-9ae90ff593e3
 
     <img width="800" alt="A plugin page shown as its own tab next to Prepare, Preview, Device and Project" src="https://github.com/user-attachments/assets/68cd7a00-25fc-4e0e-91d7-c9b287f32b81" />
 
-    https://github.com/user-attachments/assets/f8f25b32-a65b-4c58-b148-4b4053349a7f
+    <video controls width="800" src="https://github.com/user-attachments/assets/f8f25b32-a65b-4c58-b148-4b4053349a7f"></video>
 
 * **More for plugin authors: events, notifications and app info** by @peachismomo, @pavluchenkor and @HanifKoh in [15293](https://github.com/OrcaSlicer/OrcaSlicer/pull/15293), [15889](https://github.com/OrcaSlicer/OrcaSlicer/pull/15889), [15318](https://github.com/OrcaSlicer/OrcaSlicer/pull/15318), [14923](https://github.com/OrcaSlicer/OrcaSlicer/pull/14923), [14997](https://github.com/OrcaSlicer/OrcaSlicer/pull/14997) and [16324](https://github.com/OrcaSlicer/OrcaSlicer/pull/16324)
     Plugins can react to what happens in the app through **lifecycle events**. These cover projects being opened, saved or closed, slicing and G-code export starting and finishing, objects and plates being added, moved, renamed or deleted, presets being selected or saved, printers being discovered or connected, and uploads and print jobs starting and finishing. For example, the PR's sample plugin forwards these events to a Telegram chat. Plugins can also pop up notifications in the 3D view and find their own install folder. `orca.host.app_info()` returns the OrcaSlicer version, UI language and sign-in state, so plugins can match the app's language. Bug-report helpers can also read graphics-driver details, see which kind of printer is selected and save a copy of the current project. [Wiki](https://www.orcaslicer.com/wiki/plugin_development)
@@ -67,7 +67,7 @@ The new **Speed Dial** puts everything in OrcaSlicer one search away: press **Sp
 
     <img width="700" alt="Speed Dial search with recent actions and a setting's tooltip in the footer" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/speed_dial/speed_dial.png?raw=true" />
 
-    https://github.com/user-attachments/assets/008d8f41-305e-4b54-bb9a-e2d296caad8d
+    <video controls width="800" src="https://github.com/user-attachments/assets/008d8f41-305e-4b54-bb9a-e2d296caad8d"></video>
 
 * **Search the Speed Dial in English in any UI language** by @SoftFever and @lamweilun in [16369](https://github.com/OrcaSlicer/OrcaSlicer/pull/16369) and [16371](https://github.com/OrcaSlicer/OrcaSlicer/pull/16371)
     When OrcaSlicer is in another language, the Speed Dial finds commands, settings, plates, recent projects and tabs by their English names as well as their translated ones. With the UI in Chinese, for example, typing "reverse on even" finds 反转偶数层悬垂方向 and "device" finds the 设备 tab. This helps if you learned OrcaSlicer from English guides, wiki pages or videos. When a result matches only by its English name, that name appears as a faded hint next to the translated title. Searching in your own language works as before, and an English UI is unchanged.
@@ -97,7 +97,7 @@ The new **Speed Dial** puts everything in OrcaSlicer one search away: press **Sp
 
     Texture layers, their images, the painted areas and the UV layout are saved in the `.3mf`, so a project reopens with its relief still editable, even on a computer that doesn't have your custom textures.
 
-    https://github.com/user-attachments/assets/7fe10431-8c3f-4759-bd3f-78b4f7a12fc7
+    <video controls width="800" src="https://github.com/user-attachments/assets/7fe10431-8c3f-4759-bd3f-78b4f7a12fc7"></video>
 
     <img width="600" alt="A flat plate with the built-in Hexagons texture baked into its surface as real geometry" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/texture_displacement/td-shot-result.png?raw=true" />
 
@@ -111,7 +111,7 @@ The new **Speed Dial** puts everything in OrcaSlicer one search away: press **Sp
 * **Texture packs and image adjustments** by @lamweilun and @ExPikaPaka in [16473](https://github.com/OrcaSlicer/OrcaSlicer/pull/16473), [16391](https://github.com/OrcaSlicer/OrcaSlicer/pull/16391) and [16547](https://github.com/OrcaSlicer/OrcaSlicer/pull/16547)
     The texture picker groups textures into **Built-in**, **Texture libraries** and **My textures**, and each section can be collapsed. **Texture libraries** holds the texture packs you've installed as plugins, one section per pack, and **Explore more texture libraries** opens Orca Cloud on the Home page to find more. Switching off or uninstalling a pack removes its textures from the picker, while projects that already use one keep it. The picker stays responsive with large libraries, loading thumbnails as they scroll into view. The **Adjust image** button in a layer's header opens a window with **Brightness**, **Contrast**, **Sharpness**, **Blur** and **Hue**, shown on the image and on the model as you set them. The adjusted image drives the relief as well as the colours, and **Save as copy** adds it to My textures and points the layer at it.
 
-    https://github.com/user-attachments/assets/b96787cf-b475-4698-826d-5db8b9f386f1
+    <video controls width="800" src="https://github.com/user-attachments/assets/b96787cf-b475-4698-826d-5db8b9f386f1"></video>
 
     <img width="700" alt="Adjust image window with a parrot texture and Brightness, Contrast, Sharpness, Blur and Hue sliders, beside the textured model" src="https://github.com/user-attachments/assets/a9d17ffb-ed2c-49d3-8145-1721776c5e97" />
 
@@ -126,7 +126,7 @@ This release adds support for belt printers — conveyor ("infinite Z") machines
 
     <img width="700" alt="Axes of a flat-bed printer compared with a belt printer's tilted gantry" src="https://github.com/user-attachments/assets/3f5542f2-6dab-42bf-9233-f96d863b40c8" />
 
-    https://github.com/user-attachments/assets/cdb9cc83-711d-48b7-9d86-a014a32c5e8e
+    <video controls width="800" src="https://github.com/user-attachments/assets/cdb9cc83-711d-48b7-9d86-a014a32c5e8e"></video>
 
     <img width="700" alt="A plate of parts arranged on the BabyBelt Pro in Prepare" src="https://github.com/user-attachments/assets/2b448cee-339e-43c9-964b-1ee9044044c7" />
 
@@ -168,7 +168,7 @@ OrcaSlicer can now run printers with independent carriages as parallel printers.
 
     **A mode for each plate:** Every plate gets a mode icon — left-click to step through the printer's modes, right-click to pick one from a menu — so one project can mix normal plates with copy and mirror plates. The mode is saved with the project and can be undone like any other change.
 
-    https://github.com/user-attachments/assets/5ab497e3-9c2f-476a-ac67-ef34a592395b
+    <video controls width="800" src="https://github.com/user-attachments/assets/5ab497e3-9c2f-476a-ac67-ef34a592395b"></video>
 
     **Placing parts:** In a parallel mode the plate is split into one zone per active carriage. You place parts in T0's zone, and each other carriage shows a semi-transparent "ghost" of what it will print (mirrored for Mirror carriages) that follows the part as you move, rotate or scale it. Clearance strips mark where the carriages could collide; Arrange keeps parts inside T0's zone and out of the strips, and a plate with a part or the prime tower in the wrong place will not slice. If an MMU or AFC feeds one of the toolheads, click its ghost to choose which filament that carriage prints with.
 
@@ -180,11 +180,11 @@ OrcaSlicer can now run printers with independent carriages as parallel printers.
 
     Copy mode:
 
-    https://github.com/user-attachments/assets/0774d285-ba36-4b86-a594-fb6572c3aede
+    <video controls width="800" src="https://github.com/user-attachments/assets/0774d285-ba36-4b86-a594-fb6572c3aede"></video>
 
     Mirror mode:
 
-    https://github.com/user-attachments/assets/51528926-94dc-4d90-9b1a-1b42d9044be7
+    <video controls width="800" src="https://github.com/user-attachments/assets/51528926-94dc-4d90-9b1a-1b42d9044be7"></video>
 
 # ✏️ Design Tab (Early Preview)
 
@@ -195,7 +195,7 @@ The Design tab is a new, experimental CAD workspace inside OrcaSlicer. Sketch a 
 
     <img width="700" alt="Design tab with its feature tree and a part with a modelled thread" src="https://raw.githubusercontent.com/tommasobbianchi/Orca-Cad/pr-assets/2-feature-tree-thread.png" />
 
-    https://github.com/user-attachments/assets/6aac0a03-8405-403a-93b2-1fbf95da9fe7
+    <video controls width="800" src="https://github.com/user-attachments/assets/6aac0a03-8405-403a-93b2-1fbf95da9fe7"></video>
 
 * **Design tab: Text and Revolve features, clearer rendering and a smoother workflow** by @tommasobbianchi and @SoftFever in [16019](https://github.com/OrcaSlicer/OrcaSlicer/pull/16019) and [16158](https://github.com/OrcaSlicer/OrcaSlicer/pull/16158)
     Text is its own feature: pick any installed font, style and height, see the outline in place as you type, and reopen it from the feature tree to edit it — the outline is saved with the project, so it opens the same on a computer without that font. Revolve can turn a profile about any line in its sketch (such as a construction centerline), one Fillet or Chamfer can dress several edges at once, and Sketch Offset takes the whole outline. In the Design view, parts get studio-style lighting and dark edge lines so faces are easy to tell apart, and the reference planes are labelled, colour-coded squares that stay out of the way until you start a sketch — then the plane or flat face you click opens the sketch on it. Enter, Esc and clicks follow one rule everywhere (Esc steps back one level and never deletes work), Undo and Redo work inside a sketch, panning and orbiting follow your camera settings in Preferences, and Zoom to selection is available from the feature tree and the Bodies list.
@@ -209,7 +209,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 * **Bambu Lab H2C and A2L support** by @SoftFever, @dnevera and @raistlin7447 in [14685](https://github.com/OrcaSlicer/OrcaSlicer/pull/14685), [14800](https://github.com/OrcaSlicer/OrcaSlicer/pull/14800) and [14758](https://github.com/OrcaSlicer/OrcaSlicer/pull/14758)
     Adds full support for the Bambu Lab H2C and A2L, including pre-heating and cooling, and multi-colour and multi-material printing on the H2C with its nozzle-changing rack. OrcaSlicer keeps track of which filament is loaded in each of the H2C's nozzles and only purges a nozzle when its filament actually changes, so filament use and print time stay close to Bambu Studio's. Support for Bambu's Filament Track Switch has been ported too, but hasn't been tested on hardware yet, so feedback is welcome.
 
-    https://github.com/user-attachments/assets/417f0e32-1967-4536-b732-3c8dc8d4dd4a
+    <video controls width="800" src="https://github.com/user-attachments/assets/417f0e32-1967-4536-b732-3c8dc8d4dd4a"></video>
 
     <img width="600" alt="Bambu Lab H2C printing an Orca cube, with its nozzle rack in the background" src="https://github.com/user-attachments/assets/3c3c12ee-69c7-44ef-90f1-badc2a7e803a" />
 
@@ -228,7 +228,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 * **Pressure advance and cooling per nozzle variant** by @SoftFever and @nuclearmistake in [15986](https://github.com/OrcaSlicer/OrcaSlicer/pull/15986) and [16007](https://github.com/OrcaSlicer/OrcaSlicer/pull/16007)
     Filament profiles can set pressure advance, adaptive pressure advance, part and auxiliary fan speeds, temperature limits and multi-tool ramming separately for each nozzle variant. One filament profile can then carry the right values for both a Standard and a High Flow nozzle, and each filament uses the values of the nozzle it prints with. Profiles that store a single value keep applying it to every variant, so existing profiles and projects slice as before. The add:north Bambu Lab filaments in the Orca Filament Library use the new per-variant layout. **Nozzle type** moves from the printer's Basic information page to each extruder's page. Command-line slicing now fills in every per-variant filament setting for each filament, where it could previously use another filament's value.
 
-    https://github.com/user-attachments/assets/617d6d30-ce24-4507-885e-6ea2bf2e50af
+    <video controls width="800" src="https://github.com/user-attachments/assets/617d6d30-ce24-4507-885e-6ea2bf2e50af"></video>
 
 * **Compact multi-nozzle controls** by @yw4z in [15083](https://github.com/OrcaSlicer/OrcaSlicer/pull/15083), [16075](https://github.com/OrcaSlicer/OrcaSlicer/pull/16075) and [16162](https://github.com/OrcaSlicer/OrcaSlicer/pull/16162)
     The sidebar nozzle selectors take up about 40% less height on multi-nozzle printers and about half on single-nozzle ones, and they look right on Linux. In Printer settings, extruders share a single **Extruders** tab with a switch (T1, T2… or Left/Right on Bambu printers) instead of one tab each. This keeps **Motion ability** and **Notes** reachable on printers with many extruders, and on every multi-extruder printer Motion ability edits the limits of the extruder selected on the switch. The nozzle switch highlights modified values and adjusts its spacing to the number of nozzles. A multi-nozzle icon with a tooltip explains which settings are per-nozzle. The Publish dialog publishes each extruder's own retraction and Z-hop values.
@@ -250,7 +250,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 * **Precise Seam modifiers** by @DImagine in [12974](https://github.com/OrcaSlicer/OrcaSlicer/pull/12974), [16072](https://github.com/OrcaSlicer/OrcaSlicer/pull/16072) and [16170](https://github.com/OrcaSlicer/OrcaSlicer/pull/16170)
     A new modifier type that puts the seam exactly where you want it. Right-click an object, choose **Add Precise Seam** and pick a shape (or load your own mesh), and on every layer the seam is placed where that body crosses the outer wall. Three strong types (Seam Center, Seam Left, Seam Right) pin the seam to an exact point, and three weak types (Seam Enforced, Seam Blocked, Seam Neutral) mark preferred, forbidden or neutral zones the way seam painting does. Because the modifier is a separate body, it keeps working after you edit or replace the model, so there is no repainting after every design revision. Sweep a thin profile along a path drawn on the model in your CAD tool and the seam follows that path exactly. Modifiers with holes and bodies that pass right through the object are supported. A Seam Enforced or Seam Neutral modifier that encloses a whole wall acts like painting it all the way round. A Seam Blocked modifier that covers a whole wall blocks all of it, overriding any painting there: the seam is then placed as on an unmarked wall, and a slicing warning names the modifier so you can check it. If a modifier does not reach far enough into the wall to take effect, a slicing warning names it. Closes #5118 and #11162. [Wiki](https://www.orcaslicer.com/wiki/prepare_precise_seam)
 
-    https://github.com/user-attachments/assets/9a8f2d51-b6b9-46c8-8832-fcf2ec02979d
+    <video controls width="800" src="https://github.com/user-attachments/assets/9a8f2d51-b6b9-46c8-8832-fcf2ec02979d"></video>
 
     <img width="450" alt="Precise Seam Type submenu listing the six modifier types" src="https://github.com/user-attachments/assets/cd72e91f-2873-4bb6-ab6c-50be1f43137a" />
 
@@ -279,7 +279,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
     |----------|---------|
     | <img width="400" alt="Overhanging wall loop printed unsupported" src="https://github.com/user-attachments/assets/5de5654f-2599-46ef-b3a2-a7db7f651f90" /> | <img width="400" alt="Overhanging wall loop printed after the section that anchors it" src="https://github.com/user-attachments/assets/f88b8742-e3e2-4065-9e1c-89ccf88a3762" /> |
 
-    https://github.com/user-attachments/assets/d7c6d593-6c92-4780-a264-e232b30f9f98
+    <video controls width="800" src="https://github.com/user-attachments/assets/d7c6d593-6c92-4780-a264-e232b30f9f98"></video>
 
 * **Retract amount after wipe** by @valerii-bokhan in [11015](https://github.com/OrcaSlicer/OrcaSlicer/pull/11015)
     In addition to the existing *Retract amount before wipe*, you can now set how much of the retraction happens after the wipe move (Printer Settings > Extruder > Retraction, and in filament overrides; Expert mode). Splitting the retraction this way gives finer control over stringing and seam blobs on stringy filaments. The author cut the wipe distance from 2 mm to 0.2 mm on a stringy PLA+ and still got clean seams and cleaner fine details. The default of 0% keeps today's behavior. Fixes #3150. [Wiki](https://www.orcaslicer.com/wiki/printer_extruder_retraction#retract-amount-after-wipe)
@@ -402,7 +402,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 
     <img width="600" alt="Rib wall prime tower with openings at the toolchange entries" src="https://github.com/user-attachments/assets/a0873e5e-6d5a-4dc3-a3b2-41ce6d3eb3a8" />
 
-    https://github.com/user-attachments/assets/07c95ce4-f57e-40c0-a42f-f5e9b0b9ff7b
+    <video controls width="800" src="https://github.com/user-attachments/assets/07c95ce4-f57e-40c0-a42f-f5e9b0b9ff7b"></video>
 
 * **Wait for the toolchange temperature at the prime tower** by @SoftFever in [15144](https://github.com/OrcaSlicer/OrcaSlicer/pull/15144)
     New **Wait for temperature on wipe tower** printer option for multi-toolhead printers using a Type 2 wipe tower. The incoming tool's temperature is raised ahead of the tool change, and the printer waits for it parked beside the tower, right before purging — so heat-up ooze lands next to the tower instead of on the model, and the heat-up overlaps the tool change and travel instead of adding dead time. It helps most on tool changers with long docking cycles, such as Tapchanger and StealthChanger machines. Your firmware or tool change macro must not wait for the temperature itself; the option is off by default and enabled in the generic tool changer profile. [Wiki](https://www.orcaslicer.com/wiki/printer_multimaterial_wipe_tower#wait-for-temperature-on-wipe-tower)
@@ -434,11 +434,11 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 
     Before:
 
-    https://github.com/user-attachments/assets/c5b0ea61-127d-408e-bafe-f1f76c58b996
+    <video controls width="800" src="https://github.com/user-attachments/assets/c5b0ea61-127d-408e-bafe-f1f76c58b996"></video>
 
     After:
 
-    https://github.com/user-attachments/assets/ac6632b3-5d44-4013-aca3-73f6cfd1139c
+    <video controls width="800" src="https://github.com/user-attachments/assets/ac6632b3-5d44-4013-aca3-73f6cfd1139c"></video>
 
 * **Cyclic toolchange order and shorter travel between objects** by @ianalexis and @mpyrozhok in [13582](https://github.com/OrcaSlicer/OrcaSlicer/pull/13582), [14868](https://github.com/OrcaSlicer/OrcaSlicer/pull/14868), [13578](https://github.com/OrcaSlicer/OrcaSlicer/pull/13578) and [14784](https://github.com/OrcaSlicer/OrcaSlicer/pull/14784)
     A new **Toolchange ordering** option (Process › Multimaterial › Advanced) adds a **Cyclic** mode next to **Default**: Default starts each layer with the filament the previous layer ended on to keep tool changes to a minimum, while Cyclic prints the filaments in the same sequence on every layer, which costs extra tool changes but gives each colour more time to cool and generally makes multicolour models look better. In Expert mode you can set your own **Cyclic order** (e.g. `3,2,1,4`) and choose whether it also applies to the first layer, which is otherwise ordered for the best bed adhesion. The **Intra-layer order** setting, which decides the order objects are visited within a layer, now builds a shorter, looping path by default (including between parts of an assembly) and adds **Snake** and **Best of all (shortest path)** strategies — less travel, less oozing and fewer passes over parts already printed. Closes #14857. [Wiki](https://www.orcaslicer.com/wiki/multimaterial_settings_advanced#toolchange-ordering)
@@ -567,7 +567,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 * **Open G-code files with their own settings** by @SoftFever in [16463](https://github.com/OrcaSlicer/OrcaSlicer/pull/16463)
     Opening a `.gcode` file exported by OrcaSlicer now loads the printer, filaments and process it was sliced with. The preview shows the right bed model and texture, for custom and user printers too, and the sidebar shows the file's settings. They're loaded as temporary project presets, so nothing is added to your preset lists and OrcaSlicer still starts with your own printer next time. If you have unsaved preset changes, you're asked to save or discard them first, as when opening a project. Changing presets in the sidebar while the file is open, such as picking another printer model, can clear the preview; start a new project and open the file again to get it back. G-code from other slicers, or saved with **Skip G-code config block** on, previews as before.
 
-    https://github.com/user-attachments/assets/95259ca0-a749-4540-8760-26552c0dda34
+    <video controls width="800" src="https://github.com/user-attachments/assets/95259ca0-a749-4540-8760-26552c0dda34"></video>
 
 * **Tall models no longer clipped when viewing G-code files** by @anjis-elegoo in [15360](https://github.com/OrcaSlicer/OrcaSlicer/pull/15360)
     Opening a standalone G-code file no longer cuts off the top of tall models in the preview.
@@ -584,7 +584,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 
     <img width="800" alt="Publish 3MF dialog with the Process tab open and selected speed settings" src="https://github.com/user-attachments/assets/96b833c1-2b86-4c09-92b4-a4471a567e62" />
 
-    https://github.com/user-attachments/assets/acf22dd9-ae9b-4a58-b77d-8c2d9ffbc7a5
+    <video controls width="800" src="https://github.com/user-attachments/assets/acf22dd9-ae9b-4a58-b77d-8c2d9ffbc7a5"></video>
 
     <img width="600" alt="Home page recent files with a PUB badge on a published 3MF" src="https://github.com/OrcaSlicer/OrcaSlicer_WIKI/blob/main/images/publish_3mf/publish_3mf_homepage.png?raw=true" />
 
@@ -602,7 +602,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 
     <img width="600" alt="Right-click menu with the Align/Distribute submenu open over three selected objects" src="https://github.com/user-attachments/assets/92f7397c-fc2a-4c4b-8854-a56014d78edd" />
 
-    https://github.com/user-attachments/assets/44c308c3-faff-4f51-a3b7-88f264f03743
+    <video controls width="800" src="https://github.com/user-attachments/assets/44c308c3-faff-4f51-a3b7-88f264f03743"></video>
 
 * **Plate toolbar improvements** by @yw4z in [14292](https://github.com/OrcaSlicer/OrcaSlicer/pull/14292)
     The plate list in Preview is more helpful. Plates that need slicing show a **Slice** button, and plates being sliced show their progress as a percentage. Plates that can't be sliced (for example, with an object out of bounds) get a **Review** button that takes you back to Prepare. Slicing the active plate keeps your current view angle and zoom. Every plate's status now updates after process changes, and the scrollbar can be dragged again and no longer disappears when clicked.
@@ -617,7 +617,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 * **Startup progress bar** by @KrishManan in [14155](https://github.com/OrcaSlicer/OrcaSlicer/pull/14155)
     The splash screen now shows a progress bar while OrcaSlicer loads. On slower machines, startup no longer looks stuck.
 
-    https://github.com/user-attachments/assets/32f5164e-d645-4456-88a1-5cb39003caf8
+    <video controls width="800" src="https://github.com/user-attachments/assets/32f5164e-d645-4456-88a1-5cb39003caf8"></video>
 
 * **Orca Cloud inside the Home tab** by @peachismomo in [16402](https://github.com/OrcaSlicer/OrcaSlicer/pull/16402) and [16489](https://github.com/OrcaSlicer/OrcaSlicer/pull/16489)
     The **OrcaCloud** button on the Home tab now opens Orca Cloud right inside OrcaSlicer instead of in your web browser. It uses your OrcaSlicer sign-in, so you don't have to log in again, and signing out of OrcaSlicer signs it out too.
@@ -789,7 +789,7 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 * **Favorite filaments in the AMS filament list** by @KrishManan in [13946](https://github.com/OrcaSlicer/OrcaSlicer/pull/13946)
     When you set an AMS slot's filament, click the star next to a filament in the dropdown to make it a favorite. Favorites get their own **Favorite filaments** section at the top of the list, above **All filaments**, and are remembered after a restart.
 
-    https://github.com/user-attachments/assets/41e881be-d4de-4a7d-8f99-4297567adef2
+    <video controls width="800" src="https://github.com/user-attachments/assets/41e881be-d4de-4a7d-8f99-4297567adef2"></video>
 
 * **Timelapse and SD card files load again** by @nvs1-cinci in [14688](https://github.com/OrcaSlicer/OrcaSlicer/pull/14688)
     Browsing timelapses and files on a Bambu Lab printer's storage from the Device tab works again.
@@ -810,11 +810,11 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 
     Startup with Home as the start page (before on the left, after on the right):
 
-    https://github.com/user-attachments/assets/188528ba-6261-4052-b993-04fcb6de30f0
+    <video controls width="800" src="https://github.com/user-attachments/assets/188528ba-6261-4052-b993-04fcb6de30f0"></video>
 
     Opening the printer selection dialog after a profile update (before on the left, after on the right):
 
-    https://github.com/user-attachments/assets/7533fe64-7a6f-4089-8493-595dff8ccacc
+    <video controls width="800" src="https://github.com/user-attachments/assets/7533fe64-7a6f-4089-8493-595dff8ccacc"></video>
 
 * **Faster printer switching** by @Noisyfox in [14437](https://github.com/OrcaSlicer/OrcaSlicer/pull/14437)
     Switching to another printer profile is quicker, most noticeably on Windows.
@@ -837,11 +837,11 @@ This release adds Bambu Lab's latest multi-nozzle printers and lets the left and
 
     GPU load while the cursor moves over the Preview, before:
 
-    https://github.com/user-attachments/assets/18ab0aea-1e07-431c-83fe-f08eb3cb3ae3
+    <video controls width="800" src="https://github.com/user-attachments/assets/18ab0aea-1e07-431c-83fe-f08eb3cb3ae3"></video>
 
     After:
 
-    https://github.com/user-attachments/assets/fe50b19c-e062-4ff7-80e8-de20baa7c68e
+    <video controls width="800" src="https://github.com/user-attachments/assets/fe50b19c-e062-4ff7-80e8-de20baa7c68e"></video>
 
 * **Smoother G-code preview** by @HanifKoh and @ianalexis in [15833](https://github.com/OrcaSlicer/OrcaSlicer/pull/15833), [15883](https://github.com/OrcaSlicer/OrcaSlicer/pull/15883), [15884](https://github.com/OrcaSlicer/OrcaSlicer/pull/15884) and [16389](https://github.com/OrcaSlicer/OrcaSlicer/pull/16389)
     The sliced preview draws faster, especially on integrated graphics. Toolpaths are drawn top-down when you look down on the print, so hidden layers are skipped; on an AMD Radeon 610M that took whole frames of a tall print from 41–45 ms to 16–20 ms. Toolpath segments are also drawn more efficiently, with up to 61% less draw time on a large plate. Dragging the layer slider no longer recolors every point of the print at each step and runs at 108 FPS instead of 27–47 in the benchmark scene. Realistic view shadows are cheaper to draw. A new *Static* option under Preferences > Graphics > Shadows (Off / Static / Orbit) keeps the light fixed, so shadows are only recomputed when the scene changes. To check your own system, there is a *Show render timings* overlay in Preferences > Graphics and a *Benchmark 3D Scene* entry in the Help menu.
