@@ -123,8 +123,8 @@ fields live at the TOML root. Parsing is implemented in
 #### 2. The plugin API
 
 The detailed API reference is split into [Registry](registry),
-[Host](host), [Host UI](host_ui),
-[Script](script), [Slicing Pipeline](slicing),
+[Host](host), [Host UI](host_ui), [Lifecycle Events](lifecycle_events),
+[Script](script), [Pages](pages), [Slicing Pipeline](slicing),
 [Resource Texture](resource_texture), and
 [Printer Agent](printer_agent). The summary below covers the main symbols
 used when writing a plugin.
@@ -141,10 +141,12 @@ for read-only access to the live slicer model graph, presets, and mesh geometry 
 | `orca.PluginResult` | enum | `Success`, `Skipped`, `RecoverableError`, `FatalError` |
 | `orca.PluginContext` | class | base context, field `orca_version: str` |
 | `orca.ExecutionResult` | class | fields `status`, `message`, `data`; factories below |
+| `orca.LifecycleEvent`, `orca.LifecycleEvtCode`, `orca.LifecycleEventContext` | enum / enum / class | the event, outcome code and payload passed to `on_lifecycle_event` ([Lifecycle Events](lifecycle_events)) |
 | `orca.PythonPluginBase` | class | the root **capability** base; subclasses must implement `get_name()` |
 | `orca.base` | class | the **package** base; subclass it and override `register_capabilities()` |
 | `orca.plugin` | decorator | marks the single package class for the file (exactly one per file) |
 | `orca.register_capability(cls)` | function | register one capability class; call it inside `register_capabilities()` |
+| `orca.pages` | submodule | [Pages](pages): `PagesPluginCapabilityBase`, a plugin tab in the main window |
 | `orca.slicing` | submodule | [Slicing Pipeline](slicing): `Step`, `SlicingPipelineContext`, `SlicingPipelineCapabilityBase` |
 | `orca.script` | submodule | `ScriptPluginCapabilityBase` |
 | `orca.resource_texture` | submodule | `ResourceTexturePluginCapabilityBase` and `get_texture_dir()` |
@@ -233,11 +235,12 @@ assume same-origin access to the host.
 
 #### The `orca.host` module: read-only host access
 
-`orca.host` (bound in `PluginHostApi.cpp`) gives plugins **read-only** access to the running
+`orca.host` (bound in `src/slic3r/plugin/host/`) gives plugins **read-only** access to the running
 slicer. It is intended for analysis, reporting, and export plugins; nothing here mutates the
 model. **Script plugins run on the main/UI thread**, so within one `execute()` the model cannot
-change under you; **slicing-pipeline and printer-agent plugins run on a background thread**
-while the GUI keeps running. Either way, treat everything as a momentary snapshot and do not stash
+change under you; **slicing-pipeline plugins run on a background thread** while the GUI keeps
+running, and **printer-agent methods can be called on the UI thread** (select, discover,
+connect, callback registration) **or on job threads** (`start_*` print/send jobs). Either way, treat everything as a momentary snapshot and do not stash
 references across runs.
 
 **Entry points** (each raises `RuntimeError` if called before the GUI/model is ready):
@@ -316,8 +319,8 @@ dialog, a modal HTML dialog, non-modal interactive windows, and a panel docked b
 view. **A plugin must never import
 its own GUI toolkit**
 (PyQt/wxPython/tkinter): a `script` plugin shares the host's UI thread, so a second toolkit's
-event loop would clash with wxWidgets, and a `gcode`/`printer-agent` plugin runs off the main
-thread where toolkit calls would crash. These host calls run on the main thread for you and
+event loop would clash with wxWidgets, and a `gcode`/`printer-agent` plugin can run off the
+main thread where toolkit calls would crash. These host calls run on the main thread for you and
 block the calling code until they return.
 
 ```python
@@ -479,6 +482,10 @@ hardcoded colors so your dialog follows light *and* dark mode automatically. The
 See `host_ui_panel.py` for a non-modal interactive panel that browses the whole `orca.host`
 read-only API.
 
+**Notifications:** `orca.host.ui.push_notification(level, text, hyper_text="", on_click=None)`
+shows a notification in the 3D view, optionally with a clickable link. See
+[Plater Notifications](host_ui#plater-notifications).
+
 #### 3. Registration
 
 Registration has two parts, both resolved at **module import / load time**.
@@ -556,18 +563,21 @@ Additional wheel rules enforced at install time:
 Each typed base defines the method(s) OrcaSlicer will call and the type returned by
 `get_type()`. Every capability **must** implement `get_name(self) -> str`. Lifecycle hooks
 `on_load()` / `on_unload()` are optional and available on every capability (defaults do
-nothing).
+nothing). Any capability can also override `on_lifecycle_event(event, ctx)` to observe
+application events (project open/save, slicing, object and plate edits, presets, printer and
+job activity); see [Lifecycle Events](lifecycle_events).
 
 The API Reference keeps the per-module details in separate pages:
-[Script](script), [Slicing Pipeline](slicing),
+[Script](script), [Pages](pages), [Slicing Pipeline](slicing),
 [Resource Texture](resource_texture), and
 [Printer Agent](printer_agent).
 
 | Base class | `get_type()` returns | Required methods | Invoked by |
 |---|---|---|---|
 | `orca.script.ScriptPluginCapabilityBase` | `Script` | `get_name()`, `execute(self) -> ExecutionResult` | the **Plugins dialog -> Run** action |
+| `orca.pages.PagesPluginCapabilityBase` | `Pages` | `get_name()`, `get_ui(self) -> str` | a **main-window tab** added while the capability is enabled |
 | `orca.slicing.SlicingPipelineCapabilityBase` | `SlicingPipeline` | `get_name()`, `execute(self, ctx) -> ExecutionResult` | configured slicing steps and **G-code export / post-processing** |
-| `orca.printer_agent.PrinterAgentBase` | `PrinterConnection` | `get_name()` + ~30 agent methods (`get_agent_info`, `connect_printer`, ...) | the **network / printer-agent** layer on load |
+| `orca.printer_agent.PrinterAgentBase` | `PrinterConnection` | `get_name()` + ~30 agent methods (`get_agent_info`, `connect_printer`, ...) | the **network / printer-agent** layer on load; it receives print jobs only when **Preferences > Developer > Experimental Features > Use printer agents instead of print hosts** is enabled (off by default), and the printer preset's `printer_agent` field selects the agent ID |
 | `orca.resource_texture.ResourceTexturePluginCapabilityBase` | `ResourceTexture` | `get_name()`, `get_texture_dir(self) -> str` | OrcaSlicer, when the capability is materialized |
 
 > [!NOTE]
@@ -583,8 +593,10 @@ The API Reference keeps the per-module details in separate pages:
 > host handles are safe to read for the whole call and `orca.host.ui` dialogs open inline, but a
 > slow `execute()` **freezes the UI**. Keep it quick; offload heavy work to your own
 > `threading.Thread` (which must not touch the model) and surface results through a
-> `create_window` panel. `SlicingPipelineCapabilityBase` / `PrinterAgentBase` instead run on
-> background (slicing / network) threads.
+> `create_window` panel. `SlicingPipelineCapabilityBase` runs on the background slicing thread.
+> `PrinterAgentBase` methods are called on the UI thread (select / discover / connect /
+> callback registration) or on job threads (`start_*`); the host marshals the agent's
+> callbacks back to the UI thread.
 
 The slicing context (`orca.slicing.SlicingPipelineContext`) is passed to `execute` and exposes
 the live slicing graph during geometry steps. At `Step.psGCodePostProcess`, the graph fields are
@@ -691,10 +703,6 @@ class SamplePlugin(orca.base):
         orca.register_capability(EnvironmentReport)
         orca.register_capability(GCodeBenchmark)
 ```
-
-For a copy-pasteable starter that registers a script, a post-processing, and a printer-agent
-capability in one package, see
-`multi_capability_skeleton.py`.
 
 > [!NOTE]
 > When a capability is chosen for a setting (for example a post-processing capability), its
@@ -881,7 +889,7 @@ The shared building blocks come from `PythonPluginInterface.hpp`:
 
 If your type needs a new `PluginCapabilityType` value, **add it to the enum and to all three
 maps** in `PythonPluginInterface.hpp`, choosing the string the maps translate. Reuse an
-existing value (e.g. `Pages`) if it fits.
+existing value (e.g. `Analysis`) if it fits.
 
 ### Step 2: Decide the API Surface
 
